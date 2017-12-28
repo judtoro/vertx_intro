@@ -8,7 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.tclab.vertx.blog.Whisky;
+import com.globant.vtxintro.MyFirstVerticle;
+import com.globant.vtxintro.bo.Whisky;
 
 import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;

@@ -1,2 +1,3 @@
-com\tclab\vertx\MyFirstVerticle.class
-com\tclab\vertx\blog\Whisky.class
+com\globant\vtxintro\bo\Whisky.class
+com\globant\vtxintro\WhiskyStoreVerticle.class
+com\globant\vtxintro\MyFirstVerticle.class
