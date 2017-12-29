@@ -1,3 +1,3 @@
 com\globant\vtxintro\bo\Whisky.class
 com\globant\vtxintro\WhiskyStoreVerticle.class
-com\globant\vtxintro\MyFirstVerticle.class
+com\globant\vtxintro\WhiskyStoreVerticleEB.class
