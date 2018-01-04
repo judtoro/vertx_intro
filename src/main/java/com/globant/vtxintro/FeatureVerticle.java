@@ -6,6 +6,11 @@ import io.vertx.core.Future;
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
 
+/**
+ * New feature for PoC: Gives format to a String
+ * @author juan.toro
+ *
+ */
 public class FeatureVerticle extends AbstractVerticle {
 
   @Override

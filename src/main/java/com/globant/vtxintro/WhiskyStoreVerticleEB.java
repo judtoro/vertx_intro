@@ -8,6 +8,7 @@ import io.vertx.core.Future;
 import io.vertx.core.http.HttpHeaders;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.Json;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.handler.BodyHandler;
@@ -28,6 +29,9 @@ public class WhiskyStoreVerticleEB extends AbstractVerticle {
 
     createSomeData();
 
+    // Deploy FreatureVerticle
+    vertx.deployVerticle(FeatureVerticle.class.getName());
+    
     Router router = Router.router(vertx);
 
     // Bind "/" to our hello message - so we are still compatible.
@@ -59,12 +63,12 @@ public class WhiskyStoreVerticleEB extends AbstractVerticle {
   private void createSomeData() {
     Whisky bowmore = new Whisky("Bowmore 15 Years Laimrig", "Scotland, Islay");
     products.put(bowmore.getId(), bowmore);
-    Whisky talisker = new Whisky("Talisker 57� North", "Scotland, Island");
+    Whisky talisker = new Whisky("Talisker 57", "Scotland, Island");
     products.put(talisker.getId(), talisker);
   }
 
   private void getAll(RoutingContext routingContext) {
-    routingContext.response().putHeader("content-type", "application/json; charset=utf-8")
+    routingContext.response().putHeader(HttpHeaders.CONTENT_TYPE, "application/json; charset=utf-8")
         .end(Json.encodePrettily(products.values()));
   }
 
@@ -79,8 +83,9 @@ public class WhiskyStoreVerticleEB extends AbstractVerticle {
     // Name formatting
     vertx.eventBus().send("format_whisky_name", routingContext.getBodyAsJson(), ar -> {
       if (ar.succeeded()) {
-        System.out.println("Name: " + ar.result().body());
-        whisky.setName(ar.result().body() + "");
+        JsonObject result = new JsonObject(ar.result().body().toString());
+        System.out.println("Name: " + result.getString("result"));
+        whisky.setName(result.getString("result"));
       } else {
         System.out.println("Name formatting failed!. " + ar.cause());
       }
